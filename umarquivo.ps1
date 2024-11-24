@@ -26,3 +26,6 @@ try {
     Write-Host "Erro ao baixar o arquivo Excel: $_" -ForegroundColor Red
     Exit 1
 }
+
+Write-Host "Pressione ENTER para fechar o script." -ForegroundColor Cyan
+Read-Host
