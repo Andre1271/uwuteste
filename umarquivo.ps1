@@ -18,3 +18,6 @@ Write-Host "Nome do atalho: $shortcutName"
 # Exemplo: Criar um novo arquivo com o mesmo nome que o atalho, mas em formato PDF
 $outputPDFPath = Join-Path -Path $shortcutDir -ChildPath "$shortcutName.pdf"
 Write-Host "PDF será salvo como: $outputPDFPath"
+
+Write-Host "Pressione qualquer tecla para sair..." -ForegroundColor Cyan
+Read-Host
