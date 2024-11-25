@@ -27,5 +27,4 @@ try {
     Exit 1
 }
 
-Write-Host "Pressione ENTER para fechar o script." -ForegroundColor Cyan
-Read-Host
+Start-Sleep -Seconds 10
