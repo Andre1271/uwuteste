@@ -1,9 +1,8 @@
+param (
+    [string]$ShortcutPath  # Argumento esperado para o caminho do atalho
+)
+    
 try {
-    # Parâmetro esperado para receber o caminho do atalho
-    param (
-        [string]$ShortcutPath
-    )
-
     # Validar se o argumento foi passado
     if (-not $ShortcutPath) {
         Write-Host "Erro: O caminho do atalho não foi passado!" -ForegroundColor Red
