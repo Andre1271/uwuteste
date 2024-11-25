@@ -1,16 +1,29 @@
+param (
+    [string]$ShortcutPath
+)
+
 try {
-    # Obter o caminho do script que está sendo executado
-    $scriptPath = $MyInvocation.MyCommand.Path
+    # Verificar se o caminho do atalho foi passado
+    if (-not $ShortcutPath) {
+        Write-Host "Erro: O caminho do atalho não foi passado!" -ForegroundColor Red
+        Exit 1
+    }
 
-    # Obter o diretório e o nome do script
-    $scriptDir = [System.IO.Path]::GetDirectoryName($scriptPath)
-    $scriptName = [System.IO.Path]::GetFileNameWithoutExtension($scriptPath)
+    # Validar se o arquivo de atalho existe
+    if (-not (Test-Path $ShortcutPath)) {
+        Write-Host "Erro: O caminho fornecido não é válido ou o atalho não existe!" -ForegroundColor Red
+        Exit 1
+    }
 
-    Write-Host "Diretório do script: $scriptDir"
-    Write-Host "Nome do script: $scriptName"
+    # Obter o diretório e nome do atalho
+    $shortcutDir = [System.IO.Path]::GetDirectoryName($ShortcutPath)
+    $shortcutName = [System.IO.Path]::GetFileNameWithoutExtension($ShortcutPath)
 
-    # Criar caminho para o PDF
-    $outputPDFPath = Join-Path -Path $scriptDir -ChildPath "$scriptName.pdf"
+    Write-Host "Diretório do atalho: $shortcutDir"
+    Write-Host "Nome do atalho: $shortcutName"
+
+    # Criar o caminho para o PDF
+    $outputPDFPath = Join-Path -Path $shortcutDir -ChildPath "$shortcutName.pdf"
     Write-Host "PDF será salvo como: $outputPDFPath"
 
 } catch {
