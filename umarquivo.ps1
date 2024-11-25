@@ -32,5 +32,4 @@ try {
     Write-Host "Erro registrado em: $env:TEMP\script_error.log" -ForegroundColor Cyan
     Write-Host "Pressione qualquer tecla para sair..." -ForegroundColor Cyan
     Read-Host
-    Exit 1
 }
