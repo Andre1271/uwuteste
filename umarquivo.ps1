@@ -1,23 +1,32 @@
 param (
-    [string]$ShortcutPath  # Captura o caminho do atalho
+    [string]$ShortcutPath  # Argumento esperado para o caminho do atalho
 )
 
 # Validar se o argumento foi passado
 if (-not $ShortcutPath) {
     Write-Host "Erro: O caminho do atalho não foi passado!" -ForegroundColor Red
+    Write-Host "Certifique-se de passar o argumento -ShortcutPath com o atalho." -ForegroundColor Yellow
+    Write-Host "Pressione qualquer tecla para sair..." -ForegroundColor Cyan
+    Read-Host
     Exit 1
 }
 
-# Extrair o diretório e o nome do atalho
+# Validar se o arquivo existe
+if (-not (Test-Path $ShortcutPath)) {
+    Write-Host "Erro: O caminho fornecido não é válido ou o atalho não existe!" -ForegroundColor Red
+    Write-Host "Caminho fornecido: $ShortcutPath" -ForegroundColor Yellow
+    Write-Host "Pressione qualquer tecla para sair..." -ForegroundColor Cyan
+    Read-Host
+    Exit 1
+}
+
+# Processar o atalho
 $shortcutDir = [System.IO.Path]::GetDirectoryName($ShortcutPath)
 $shortcutName = [System.IO.Path]::GetFileNameWithoutExtension($ShortcutPath)
 
 Write-Host "Diretório do atalho: $shortcutDir"
 Write-Host "Nome do atalho: $shortcutName"
 
-# Exemplo: Criar um novo arquivo com o mesmo nome que o atalho, mas em formato PDF
+# Criar caminho para o PDF
 $outputPDFPath = Join-Path -Path $shortcutDir -ChildPath "$shortcutName.pdf"
 Write-Host "PDF será salvo como: $outputPDFPath"
-
-Write-Host "Pressione qualquer tecla para sair..." -ForegroundColor Cyan
-Read-Host
